@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "secrets_tool"
+description = "A lightweight tool to easily encrypt/decrypt secrets inside a repository"
+authors = ["Alexander Hungenberg <alexander.hungenberg@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/defreng/secrets-tool"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+# Version is set by GitHub action workflow (on release)
+version = "0.0.1+local"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+cryptography = "^2.9.2"
+"ruamel.yaml" = "^0.16.10"
+
+[tool.poetry.scripts]
+secrets_tool = "secrets_tool.__main__:main"
+
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.782"
+flake8 = "^3.8.3"
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

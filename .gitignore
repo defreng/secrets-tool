@@ -1,0 +1,4 @@
+.idea/
+**/.mypy_cache
+src/secrets_tool.egg-info
+dist/
