@@ -3,9 +3,9 @@ This is a small tool which helps to encrypt secrets that must be committed to a 
 
 It has the advantage to natively support partial encryption of YAML files. This is of great advantage, as it allows to see the YAML file structure even when some of its contents are encrypted (your PR reviewers and diff tools will thank you)
 
-## Prerequisites
-* Python >= 3.7
-* Having the following packages installed: `pip install ruamel.yaml cryptography`
+## Installation
+Docker build:
+`docker build --build-arg VERSION=0.0.1+local -t secrets_tool .`
 
 ## Usage
 The tool reads a list of files to encrypt/decrypt from a `.gitignore` file. In there it will only consider files that are sorrounded by a comment block as in the following example:
@@ -16,14 +16,11 @@ kaas-rubik-stage/values.yaml
 # END ENCRYPTED
 ```
 
-Run the tool by giving the `.gitignore` file as an argument, together with either a `encrypt` or `decrypt` command:
+Execute the tool in the directory containing the `.gitignore` file:
+* decrypt: `docker run -v $(pwd):/repo -v ~/.my-secret-key:/secrets-tool-key secrets_tool`
+* encrypt: `docker run -v $(pwd):/repo -v ~/.my-secret-key:/secrets-tool-key secrets_tool encrypt`
 
-```
-cd <REPOSITORY_ROOT>
-python -m utils.secrets_tool k8s_helm/.gitignore encrypt
-```
-
-## Syntax
+## .gitignore Syntax
 The tool provides different encryption handlers for all kind of file types.
 * `yaml` for YAML files that are used by tools which are okay having a `!decrypted` tag in front of strings
 * `yamlcompat` for tools that don't like the additional 'encryption marker' tag.

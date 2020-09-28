@@ -16,13 +16,13 @@ HANDLERS = {
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('filename')
+    parser.add_argument('-f', '--filename', default='.gitignore')
     parser.add_argument('command', choices=('e', 'encrypt', 'd', 'decrypt'))
 
     args = parser.parse_args()
 
     secrets_file_locations = (
-        Path(Path.home(), '.tap-rubik-key'),
+        Path('/secrets-tool-key'),
         Path(Path.home(), '.secrets-tool-key'),
     )
 
